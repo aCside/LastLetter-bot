@@ -1,6 +1,6 @@
 # TitanBot v6.6
 
-TitanBot is an advanced, fully configurable automation tool designed for competitive word games (such as Bomb Party, Word Bomb, etc.) where players must quickly type words containing a specific syllable.
+TitanBot is an advanced, fully configurable automation tool made for Roblox game "Last Letter"
 
 Unlike basic solvers, TitanBot focuses on humanization and strategy, allowing it to mimic natural typing patterns, make intentional mistakes, and prioritize words that are difficult for opponents to counter.
 
