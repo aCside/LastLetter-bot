@@ -44,7 +44,7 @@ Reroll (F4): Don't like the word? Press F4 to scrub the input and find the next 
 
 Ban/Unban: Encountered a bad word? Ban it instantly via hotkey or the UI.
 
-Profiles: Save and load different config presets for different game modes.
+Profiles: Save and load different config presets.
 
 Themes: Switch between Dark and Light modes.
 
