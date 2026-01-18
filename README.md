@@ -79,3 +79,5 @@ Beta Status: This software is currently in version v6.6. While robust, it may co
 Use at your own risk: Automation tools may violate the Terms of Service of the game. The creator is not responsible for bans or restrictions placed on your accounts.
 
 ## Won't continue this
+
+If you want to support, you can throw me a few Robux, here is my user - operator_hack
