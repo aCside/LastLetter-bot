@@ -24,7 +24,7 @@ Smart: Balanced approach based on length and complexity.
 
 Custom: Define your own 3-stage priority waterfall (e.g., Try Killer -> Then Longest -> Then Random).
 
-🤖 Human-Like Behavior
+Human-Like Behavior:
 
 TitanBot doesn't just paste text; it simulates a real keyboard.
 
