@@ -2,8 +2,6 @@
 
 TitanBot is an advanced, fully configurable automation tool made for Roblox game "Last Letter"
 
-Unlike basic solvers, TitanBot focuses on humanization and strategy, allowing it to mimic natural typing patterns, make intentional mistakes, and prioritize words that are difficult for opponents to counter.
-
 # Key Features:
 
 ## Intelligent Word Generation:
