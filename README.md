@@ -1,8 +1,10 @@
+# Run the bot in a new created folder
+
+
 # TitanBot v6.6
 
 TitanBot is an advanced, fully configurable automation tool made for Roblox game "Last Letter"
 
-### Run the bot in a new created folder
 
 # Key Features:
 
@@ -74,4 +76,4 @@ The bot includes a Self-Installer: it will automatically detect missing librarie
 
 Beta Status: This software is currently in version v6.6. While robust, it may contain bugs or edge cases where word filtering isn't 100% perfect (e.g., some obscure proper nouns might slip through).
 
-Use at your own risk: Automation tools may violate the Terms of Service of certain games. The creator is not responsible for bans or restrictions placed on your accounts.
+Use at your own risk: Automation tools may violate the Terms of Service of the game. The creator is not responsible for bans or restrictions placed on your accounts.
