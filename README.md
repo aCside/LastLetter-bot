@@ -4,9 +4,9 @@ TitanBot is an advanced, fully configurable automation tool designed for competi
 
 Unlike basic solvers, TitanBot focuses on humanization and strategy, allowing it to mimic natural typing patterns, make intentional mistakes, and prioritize words that are difficult for opponents to counter.
 
-## Key Features:
+# Key Features:
 
-### Intelligent Word Generation:
+## Intelligent Word Generation:
 
 Hybrid Database: Uses a local database combined with the Datamuse API to find words instantly.
 
