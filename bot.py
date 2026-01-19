@@ -386,6 +386,8 @@ class BotGUI:
         self.last_ban_time = 0
         self.processing_action = False # Flag to prevent overlap/spam
         
+        self.binding_var = None # FIX: Flag for binding mode
+
         self.topmost_var = tk.BooleanVar(value=True)
         self.sound_var = tk.BooleanVar(value=True)
         self.win_list_var = tk.StringVar(value="Active Window")
@@ -505,7 +507,10 @@ class BotGUI:
         try:
             while True:
                 task = self.gui_queue.get_nowait()
-                task[0](*task[1])
+                try:
+                    task[0](*task[1])
+                except Exception as e:
+                    print(f"Task Error: {e}")
         except queue.Empty: pass
         self.root.after(50, self.process_gui_queue)
 
@@ -1120,6 +1125,18 @@ class BotGUI:
 
     def on_key_event(self, event):
         if event.event_type != 'down': return
+        
+        # --- FIX: CHECK BINDING MODE FIRST ---
+        if getattr(self, 'binding_var', None) is not None:
+            try:
+                # Capture the key and update UI immediately
+                key = event.name.lower()
+                self.gui_queue.put((self.finish_bind, [self.binding_var, key]))
+                self.binding_var = None # Reset flag to stop capturing
+            except: pass
+            return
+        # -------------------------------------
+
         if self.is_typing_active: return # Ignore keys while bot is typing to prevent double-counting
         if not self.target_word: return
         key = event.name.lower()
@@ -1554,14 +1571,12 @@ class BotGUI:
         self.root.focus()
         var.set("Press...")
         self.root.update()
-        def wait_for_key():
-            event = keyboard.read_event()
-            while event.event_type != 'down': event = keyboard.read_event()
-            self.gui_queue.put((self.finish_bind, [var, event.name.lower()]))
-        threading.Thread(target=wait_for_key, daemon=True).start()
+        # FIX: Replaced threaded read_event with a state flag to use the existing hook
+        self.binding_var = var
 
     def finish_bind(self, var, key_name):
         var.set(key_name)
+        self.binding_var = None # Reset flag
         self.update_binds()
         
     def update_binds(self):
@@ -1580,12 +1595,16 @@ class BotGUI:
         self.ban_key = self.ban_key_var.get().lower()
         self.unban_key = self.unban_key_var.get().lower()
         
+        # Helper to safely trigger hotkeys on main thread
+        def safe_trigger(fn):
+            self.gui_queue.put((fn, []))
+
         try:
-            if self.reroll_key: keyboard.add_hotkey(self.reroll_key, self.reroll)
-            if self.smart_key: keyboard.add_hotkey(self.smart_key, self.toggle_smart_hotkey)
-            if self.stop_key: keyboard.add_hotkey(self.stop_key, self.stop_typing)
-            if self.ban_key: keyboard.add_hotkey(self.ban_key, self.ban_last)
-            if self.unban_key: keyboard.add_hotkey(self.unban_key, self.unban_last_hotkey)
+            if self.reroll_key: keyboard.add_hotkey(self.reroll_key, lambda: safe_trigger(self.reroll))
+            if self.smart_key: keyboard.add_hotkey(self.smart_key, lambda: safe_trigger(self.toggle_smart_hotkey))
+            if self.stop_key: keyboard.add_hotkey(self.stop_key, lambda: safe_trigger(self.stop_typing))
+            if self.ban_key: keyboard.add_hotkey(self.ban_key, lambda: safe_trigger(self.ban_last))
+            if self.unban_key: keyboard.add_hotkey(self.unban_key, lambda: safe_trigger(self.unban_last_hotkey))
         except: pass
 
         if self.active_step_hook and self.target_word:
